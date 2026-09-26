@@ -1,0 +1,25 @@
+1. ST7735 Display to Seeed XIAO ESP32S3
+
+VCC to XIAO 3.3V
+
+GND to XIAO GND
+
+CS to XIAO D1 (GPIO 2)
+
+RESET to XIAO D2 (GPIO 3)
+
+DC / A0 to XIAO D3 (GPIO 4)
+
+SDA / MOSI to XIAO D10 (GPIO 10)
+
+SCK / SCLK to XIAO D8 (GPIO 8)
+
+LED / BL to XIAO 3.3V
+
+
+
+2. 3.7V LiPo Battery to Back Pads
+
+Red Wire (+) to BAT+ pad on the underside of the XIAO
+
+Black Wire (-) to BAT- pad on the underside of the XIAO
