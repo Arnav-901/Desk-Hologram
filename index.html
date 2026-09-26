@@ -32,12 +32,13 @@
       align-items: center;
       position: relative;
       overflow-x: hidden;
+      padding: 2rem 1rem;
     }
 
     /* ROBOVEDA Watermark Background */
     body::before {
       content: "ROBOVEDA";
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(-25deg);
@@ -53,7 +54,7 @@
 
     /* Futuristic Grid Overlay */
     .grid-overlay {
-      position: absolute;
+      position: fixed;
       inset: 0;
       background-image: 
         linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
@@ -67,7 +68,7 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 520px;
+      max-width: 680px;
       padding: 2.5rem;
       background: var(--card-bg);
       backdrop-filter: blur(16px);
@@ -76,7 +77,7 @@
       border-radius: 16px;
       box-shadow: 0 0 30px rgba(0, 240, 255, 0.1), inset 0 0 15px rgba(0, 240, 255, 0.05);
       text-align: center;
-      margin: 1rem;
+      margin: auto;
     }
 
     .badge {
@@ -94,7 +95,7 @@
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -0.025em;
       background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
@@ -109,12 +110,68 @@
       margin-bottom: 2rem;
     }
 
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 1.8rem 0 0.8rem 0;
+      text-align: left;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      padding-bottom: 0.4rem;
+    }
+
+    .description-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+
+    .description-card p {
+      margin-bottom: 0.8rem;
+    }
+
+    .description-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .features-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .features-list li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .features-list li::before {
+      content: "■";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-size: 0.7rem;
+      top: 0.2rem;
+    }
+
+    .features-list strong {
+      color: var(--accent-cyan);
+    }
+
     .info-card {
       background: rgba(0, 0, 0, 0.4);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 8px;
       padding: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       text-align: left;
     }
 
@@ -122,7 +179,7 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.85rem;
-      padding: 0.35rem 0;
+      padding: 0.4rem 0;
     }
 
     .info-row:not(:last-child) {
@@ -134,6 +191,51 @@
     }
 
     .info-value {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .wiring-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .wiring-subheading {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0.8rem 0 0.4rem 0;
+    }
+
+    .wiring-subheading:first-child {
+      margin-top: 0;
+    }
+
+    .wiring-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .wiring-table th, .wiring-table td {
+      padding: 0.4rem 0.6rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .wiring-table th {
+      color: var(--text-sub);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+
+    .wiring-table td:last-child {
       color: var(--accent-cyan);
       font-weight: 600;
     }
@@ -162,19 +264,6 @@
       box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
       transform: translateY(-1px);
     }
-
-    .footer-link {
-      margin-top: 2rem;
-      display: block;
-      color: var(--text-sub);
-      font-size: 0.85rem;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .footer-link:hover {
-      color: var(--accent-cyan);
-    }
   </style>
 </head>
 <body>
@@ -201,9 +290,60 @@
       </div>
     </div>
 
-    <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
+    <div class="section-title">Project Overview</div>
+    <div class="description-card">
+      <p>This project is a compact, portable desktop hologram device powered by a Seeed Studio XIAO ESP32-S3 microcontroller and a 1.8" ST7735 SPI TFT Display. By utilizing a reflection prism structure combined with software-level horizontal screen mirroring, the display projects floating, high-contrast holographic visual effects on a desk setup.</p>
+    </div>
 
-    <a href="../" class="footer-link">&larr; Back to Main Portfolio</a>
+    <div class="section-title">Key Features & Architecture</div>
+    <div class="description-card">
+      <ul class="features-list">
+        <li><strong>Multi-Mode HUD Engine:</strong> Displays real-time synced clock interfaces, interactive text banners, floating lyrics streams, custom color controls, and dynamic 3D wireframes (including Tesseract, Gyroscope, Octa Gem, Icosahedron, and Torus) rendered entirely on-chip.</li>
+        <li><strong>Procedural Audio Visualizer:</strong> Features a synthetic multi-frequency sine wave graphic visualizer running in real time without requiring external hardware audio inputs or microphonic noise filtering.</li>
+        <li><strong>Native Touch Mode Control:</strong> Uses built-in capacitive touch sensing on the XIAO ESP32-S3 to cycle through display modes with a tap.</li>
+        <li><strong>Web Control Dashboard:</strong> Hosts an integrated Wi-Fi Web Server and WebSocket framework, allowing dynamic color theme changes and text updates from any phone or browser.</li>
+        <li><strong>Portable Dual Battery Power Supply:</strong> Powered via two 3.7V Lithium-Ion batteries wired in parallel with an integrated power switch and dedicated charging management.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Hardware Wiring Schematic</div>
+    <div class="wiring-card">
+      <div class="wiring-subheading">1. ST7735 Display to Seeed XIAO ESP32S3</div>
+      <table class="wiring-table">
+        <thead>
+          <tr>
+            <th>Display Pin</th>
+            <th>XIAO Pin / GPIO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>VCC</td><td>XIAO 3.3V</td></tr>
+          <tr><td>GND</td><td>XIAO GND</td></tr>
+          <tr><td>CS</td><td>XIAO D1 (GPIO 2)</td></tr>
+          <tr><td>RESET</td><td>XIAO D2 (GPIO 3)</td></tr>
+          <tr><td>DC / A0</td><td>XIAO D3 (GPIO 4)</td></tr>
+          <tr><td>SDA / MOSI</td><td>XIAO D10 (GPIO 10)</td></tr>
+          <tr><td>SCK / SCLK</td><td>XIAO D8 (GPIO 8)</td></tr>
+          <tr><td>LED / BL</td><td>XIAO 3.3V</td></tr>
+        </tbody>
+      </table>
+
+      <div class="wiring-subheading">2. 3.7V LiPo Battery to Back Pads</div>
+      <table class="wiring-table">
+        <thead>
+          <tr>
+            <th>Battery Wire</th>
+            <th>XIAO Underside Pad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Red Wire (+)</td><td>BAT+ Pad</td></tr>
+          <tr><td>Black Wire (-)</td><td>BAT- Pad</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
   </div>
 
 </body>
