@@ -1,7 +1,7 @@
 {
   "name": "ROBOVEDA Hologram Web Flasher",
   "version": "1.0.0",
-  "home_url": "https://ROBOVEDA.github.io/hologram",
+  "home_url": "https://github.com/Arnav-901/Desk-Hologram",
   "funding_url": "",
   "new_install_prompt_erase": true,
   "builds": [
