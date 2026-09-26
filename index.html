@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROBOVEDA - Hologram Project Flasher</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  <style>
+    :root {
+      --bg-color: #030712;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --accent-cyan: #00f0ff;
+      --accent-blue: #3b82f6;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --border-color: rgba(0, 240, 255, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ROBOVEDA Watermark Background */
+    body::before {
+      content: "ROBOVEDA";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      font-size: clamp(4rem, 15vw, 16rem);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.02);
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    /* Futuristic Grid Overlay */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      padding: 2.5rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.1), inset 0 0 15px rgba(0, 240, 255, 0.05);
+      text-align: center;
+      margin: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 9999px;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .info-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      padding: 0.35rem 0;
+    }
+
+    .info-row:not(:last-child) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .info-label {
+      color: var(--text-sub);
+    }
+
+    .info-value {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    esp-web-install-button {
+      --esp-tools-button-color: var(--accent-cyan);
+      --esp-tools-button-text-color: #030712;
+      --esp-tools-button-border-radius: 8px;
+    }
+
+    esp-web-install-button::part(button) {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      border: none;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    esp-web-install-button::part(button):hover {
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .footer-link {
+      margin-top: 2rem;
+      display: block;
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grid-overlay"></div>
+
+  <div class="container">
+    <div class="badge">ROBOVEDA Firmware Tool</div>
+    <h1>Hologram Project</h1>
+    <p class="subtitle">Web-based firmware flasher for custom hardware</p>
+
+    <div class="info-card">
+      <div class="info-row">
+        <span class="info-label">Target Hardware</span>
+        <span class="info-value">Seeed XIAO ESP32-S3</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Chip Family</span>
+        <span class="info-value">ESP32-S3</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Interface</span>
+        <span class="info-value">Web Serial API</span>
+      </div>
+    </div>
+
+    <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
+
+    <a href="../" class="footer-link">&larr; Back to Main Portfolio</a>
+  </div>
+
+</body>
+</html>
